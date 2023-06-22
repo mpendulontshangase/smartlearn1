@@ -1,0 +1,77 @@
+/* layout.module.css */
+
+.navbar {
+    background-color:#3A6B35;
+
+    padding: 10px;
+  }
+  
+  .navbarContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .navbarLogo {
+    width: 100px;
+  }
+  
+  .navbarMenu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbarMenuItem {
+    margin-right: 10px;
+  }
+  
+  .navbarMenuItem a {
+    text-decoration: none;
+ 
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+
+  
+  .navbarMenuItem a:hover {
+    background-color: #ddd;
+  }
+  
+  .navbarActions .navbarButton {
+  
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .navbarRActions .navbarRButton {
+    background-color:transparent;
+    border:2px solid;
+    color: #fff;
+  
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .navbarLActions .navbarLButton {
+    background-color:#333;
+    border:2px solid;
+    color: #fff;
+  
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+ 
+  
+  .footer {
+    text-align: center;
+    margin-top: 20px;
+  }
+  

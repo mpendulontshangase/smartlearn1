@@ -1,0 +1,51 @@
+/* layout.module.css */
+
+.nav-container {
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #3A6B35;
+    border-radius: 10px;
+
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .search-container {
+    /* flex: 1; */
+    /* margin: 0 1rem; */
+  }
+  
+  .search-input {
+    
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+  }
+  
+  .user-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-email {
+    margin-right: 1rem;
+    color: white;
+  }
+  
+  .footer {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  

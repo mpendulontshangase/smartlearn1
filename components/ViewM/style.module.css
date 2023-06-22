@@ -1,0 +1,31 @@
+.message {
+    width: 80%;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 2px solid;
+  }
+  
+  .sender {
+    font-weight: bold;
+  }
+  
+  .content {
+    margin-top: 5px;
+  }
+  
+  .reply {
+    margin-top: 10px;
+    background-color: lightgreen;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  /* Additional Styles */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  

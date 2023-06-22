@@ -1,0 +1,33 @@
+/* style.module.css */
+.formGroup {
+    margin-bottom: 16px;
+  }
+  
+  .label {
+    display: inline-block;
+    margin-right: 8px;
+    font-weight: bold;
+  }
+  
+  .required {
+    color: red;
+  }
+  
+  .textArea {
+    width: 100%;
+    height: 150px;
+    resize: vertical;
+  }
+  
+  .button {
+    background-color: green;
+    color: white;
+  }
+  
+  .modalFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+  }
+  

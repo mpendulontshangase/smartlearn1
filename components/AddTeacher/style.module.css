@@ -1,0 +1,10 @@
+.maingrid{
+    display: flex;
+
+}
+.fgrid{
+    width: 100vw;
+}
+.sgrid{
+    width: 100vw;
+}

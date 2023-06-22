@@ -1,0 +1,16 @@
+.tugbtm_div{
+    margin: 20px;
+    display: flex;
+   justify-content: center;
+   gap: 70px;
+}
+.deletebutton{
+    background-color: rgb(205, 37, 37);
+    color: white;
+   
+}
+.viewbutton{
+    background-color: rgb(205, 37, 37);
+    color: white;
+   
+}
