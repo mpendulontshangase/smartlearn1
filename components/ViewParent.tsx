@@ -88,7 +88,7 @@ const ViewParent: React.FC<IParent> = ({
   gender,
   dateOfBirth,
   passport,
-  relationship,
+  
           }}
         >
           <div style={{ display: "flex", justifyContent:"space-around" }}>
@@ -140,17 +140,7 @@ const ViewParent: React.FC<IParent> = ({
                     )}
                 </Form.Item>
 
-                <Form.Item label="Relationship" name="relationship">
-                    {edit ? (
-                    <Select>
-                        <Option value="Mother">Mother</Option>
-                        <Option value="Father">Father</Option>
-                        <Option value="Other">Other</Option>
-                    </Select>
-                    ) : (
-                    <span>{relationship}</span>
-                    )}
-                </Form.Item>
+               
 
                 <Form.Item label="Date of Birth" name="DOB">
                     {edit ? <DatePicker /> : <span>{dateOfBirth}</span>}
@@ -158,6 +148,12 @@ const ViewParent: React.FC<IParent> = ({
 
                 <Form.Item label="Age" name="age">
                     {edit ? <InputNumber /> : <span>{age}</span>}
+                </Form.Item>
+                <Form.Item label="Password" name="password">
+                    {edit ? <Input /> : <span>{password}</span>}
+                </Form.Item>
+                <Form.Item label="Username" name="username">
+                    {edit ? <Input /> : <span>{username}</span>}
                 </Form.Item>
                 </div>
           </div>

@@ -1,42 +1,68 @@
-.container {
+.List {
     background-color: transparent;
-    width: 200px;
-    height: 100px;
+    width: 230px;
+    height: 140px;
     border-radius: 10px;
     padding: 20px;
-    margin: 20px;
+    margin: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #CBD18F;
+    color: #003eb3;
     font-size: 18px;
     font-weight: bold;
     /* border:2px solid black; */
-    box-shadow: 0px 0px 5px 1px black;
+    box-shadow: 0px 0px 5px 1px #91caff;
+  }
+
+  .smg{
+    background-color: #69b1ff;
+    width: 280px;
+    text-align: center;
+    align-items: center;
+    margin-left: 10px;
+    margin-bottom: 5px;
+  }
+  .container{
+    display: flex;
+    flex-wrap: wrap;
   }
   
-  .cover {
-    display: grid;
-    /* grid-template-columns: repeat(3, 1fr); */
-    gap: 20px;
+
+
+
+
+  .you{
+    font-weight: bold;
+    position: relative;
+    top: 250px;
+    left: 150px;
+    font-size: 30px;
   }
+
+ .formGroup{
+    width: 80vh
+ }
+ .formGroupt{
+    height: 100px;
+ }
   
   .button {
     display: flex;
     justify-content: space-between;
-    margin: 20px;
+    margin: 10px;
   }
   
   .message {
     /* background-color: green; */
-    color: white;
+    /* color: white; */
   }
   
   .MovieSubject {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
+    /* font-size: 18px; */
+    /* font-weight: bold; */
+    /* margin-bottom: 10px; */
   }
   
   .MovieGrade {
@@ -46,17 +72,17 @@
   
   /* Align the first three containers to the left */
   .cover:nth-child(odd) .container {
-    justify-content: flex-start;
+    /* justify-content: flex-start; */
   }
   
   /* Align the last three containers to the right */
   .cover:nth-child(even) .container {
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
   }
 
   .flex{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     /* align-items: center; */
   }
   .thebox{

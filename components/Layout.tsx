@@ -21,7 +21,7 @@ const Layout = ({ children, title = 'Smart Learn' }: Props) => {
 
   useEffect(() => {
     const decodedToken = getToken();
-    console.log("thee",decodedToken)
+   
     if (decodedToken) {
       const { username, email } = decodedToken.user;
       setId(decodedToken?.user?.UserId || '');
@@ -45,7 +45,7 @@ const Layout = ({ children, title = 'Smart Learn' }: Props) => {
             </Link>
           </div>
           <div className={styles['search-container']}>
-            <input className={styles['search-input']} type="text" placeholder="Search" />
+            {/* <input className={styles['search-input']} type="text" placeholder="Search" /> */}
             {/* <Search/> */}
           </div>
           <div className={styles['user-container']}>
@@ -55,10 +55,7 @@ const Layout = ({ children, title = 'Smart Learn' }: Props) => {
         </nav>
       </header>
       {children}
-      <footer className={styles.footer}>
-        <hr />
-        <span>@intozami zimayakayaka</span>
-      </footer>
+    
     </div>
   );
 };

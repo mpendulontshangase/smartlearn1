@@ -18,6 +18,7 @@ export interface ITeacher {
   passport?: string;
   grade?: string;
   subject?: string;
+  subjectDisplay?:[];
 }
 
 export interface ITeacherStateContext {

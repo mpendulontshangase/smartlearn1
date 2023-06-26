@@ -5,6 +5,8 @@ export interface IMessage {
   message_Description:string;
   time_sent:string;
   reply:string;
+  subject?:any[];
+  grade?:any
   
 }
 export interface IReply{

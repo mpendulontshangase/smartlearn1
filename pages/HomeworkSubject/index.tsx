@@ -1,14 +1,15 @@
 
 import React from 'react'
 import Layout from '../../components/Layout';
-import Sub from '../../components/Sub/sub';
+import HomeworkComponent from '../../components/HomeworkSubject/HomeworkSubject';
+
 
 function Subject() {
   return (
     <div>
         <Layout>
         <div>
-           <Sub/>
+           <HomeworkComponent/>
 
         </div>
 

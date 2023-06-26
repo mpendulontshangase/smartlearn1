@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   DatePicker,
@@ -12,14 +12,32 @@ import {
 } from "antd";
 import Link from "next/link";
 import styles from "./style.module.css";
-import MultRef from "../Select";
+
 import { useLearner } from "../../Providers/Learner";
+import { useUser } from "../../Providers/User";
+import { useForm } from "antd/es/form/Form";
 
 const Learner: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSubjects, setSelectedSubjects] = useState([]);
+  const [id, setId] = useState(null);
 
   const {CreateLearner}=useLearner();
+  const {getUserDetails, personInfo}=useUser();
+  const [form]=useForm();
+  
+
+
+ 
+  
+  useEffect(()=>{
+   
+    if(personInfo){
+      setId(personInfo.id)
+    }
+  },[personInfo])
+
+  
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -37,37 +55,37 @@ const Learner: React.FC = () => {
     setSelectedSubjects(selectedSubjects);
   };
 
-  const calculateSelectedSubjectValue = () => {
-    let sum = 0;
-    selectedSubjects.forEach((subject) => {
-      sum += subject;
-    });
-    return sum;
-  };
-
+ 
   const onFinish = (values) => {
-    const parent_Id = "42b57a67-c3e1-4636-5bc6-08db6cdd10c2"
-    const subject = calculateSelectedSubjectValue();
-    console.log("Form values:", values);
-    console.log("Selected subjects:", selectedSubjects);
-    const mergedValues = {...values,subject,parent_Id}
-    console.log("Meeee:", mergedValues);
-
+    const parent_Id = id;
+    const subject = selectedSubjects; // Use the selectedSubjects array directly
+  
+    const mergedValues = { ...values, subject, parent_Id };
+  
+  
+    
+  
+  
 
 
     CreateLearner(mergedValues)
-    // Pass the selectedSubjectValue to the desired prop or perform other operations with it
+    form.resetFields();
+  
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    // console.log("Failed:", errorInfo);
   };
 
   const options = [
     { label: "IsiZulu", value: 1 },
     { label: "English", value: 2 },
-    { label: "Maths", value: 4 },
-    // Add more options as needed
+    { label: "Mathematics", value: 4 },
+    { label: "Life Orientation", value: 8 },
+    { label: "Technology", value: 16 },
+    { label: "NS", value: 32 },
+    { label: "EMS", value: 64 },
+  
   ];
 
   return (
@@ -75,7 +93,7 @@ const Learner: React.FC = () => {
       <Button
         type="primary"
         onClick={showModal}
-        style={{ backgroundColor: "green" }}
+        style={{ backgroundColor: "#69b1ff" ,color:"black"}}
       >
         Add Learner
       </Button>
@@ -84,7 +102,8 @@ const Learner: React.FC = () => {
         visible={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        style={{ width: "100%" }}
+        width={700}
+        style={{ width: "100vw" }}
         footer={null}
       >
         <Form
@@ -98,14 +117,14 @@ const Learner: React.FC = () => {
           <div style={{ display: "flex" }}>
             <div style={{ width: "100vw" }}>
               <Form.Item
-                label="Name"
+                
                 name="name"
                 rules={[{ required: true, message: "Please input the name" }]}
               >
                 <Input placeholder="Name" />
               </Form.Item>
               <Form.Item
-                label="ID Number"
+             
                 name="idNumber"
                 rules={[
                   { required: true, message: "Please input the ID number" },
@@ -115,7 +134,7 @@ const Learner: React.FC = () => {
               </Form.Item>
 
               <Form.Item
-                label="Username"
+              
                 name="username"
                 rules={[
                   { required: true, message: "Please input the username" },
@@ -124,20 +143,18 @@ const Learner: React.FC = () => {
                 <Input placeholder="Username" />
               </Form.Item>
               
-              <Form.Item label="Passport" name="passport">
+              <Form.Item name="passport">
                 <Input placeholder="Passport" />
               </Form.Item>
               <Form.Item
-                label="Second Name"
+              
                 name="secondName"
-                rules={[
-                  { required: true, message: "Please input the second name" },
-                ]}
+               
               >
                 <Input placeholder="Second Name" />
               </Form.Item>
               <Form.Item
-                label="Surname"
+               
                 name="surname"
                 rules={[
                   { required: true, message: "Please input the surname" },
@@ -146,7 +163,7 @@ const Learner: React.FC = () => {
                 <Input placeholder="Surname" />
               </Form.Item>
               <Form.Item
-                label="Password"
+              
                 name="password"
                 rules={[
                   { required: true, message: "Please input the password" },
@@ -154,19 +171,20 @@ const Learner: React.FC = () => {
               >
                 <Input placeholder="Password" />
               </Form.Item>
-              <Form.Item
-                label="Phone Number"
-                name="phoneNumber"
-                rules={[
-                  { required: true, message: "Please input the phone number" },
-                ]}
-              >
-                <Input placeholder="Phone Number" />
-              </Form.Item>
+             
             </div>
             <div style={{ width: "100vw" }}>
+            <Form.Item
+            
+            name="phoneNumber"
+            rules={[
+              { required: true, message: "Please input the phone number" },
+            ]}
+          >
+            <Input placeholder="Phone Number" />
+          </Form.Item>
               <Form.Item
-                label="Email Address"
+              
                 name="EmailAddress"
                 rules={[
                   { required: true, message: "Please input the email address" },
@@ -175,7 +193,7 @@ const Learner: React.FC = () => {
                 <Input placeholder="Email Address" />
               </Form.Item>
               <Form.Item
-                label="Street Address"
+            
                 name="streetAddress"
                 rules={[
                   {
@@ -187,13 +205,13 @@ const Learner: React.FC = () => {
                 <Input placeholder="Street Address" />
               </Form.Item>
               <Form.Item
-                label="Gender"
+             
                 name="gender"
                 rules={[
                   { required: true, message: "Please select the gender" },
                 ]}
               >
-                <Select>
+                <Select placeholder="Gender">
                   <Select.Option value={1}>Male</Select.Option>
                   <Select.Option value={2}>Female</Select.Option>
                   <Select.Option value={3}>Other</Select.Option>
@@ -213,20 +231,20 @@ const Learner: React.FC = () => {
                 </Select>
               </Form.Item> */}
               <Form.Item
-                label="Grade"
+               
                 name="grade"
                 rules={[{ required: true, message: "Please select the grade" }]}
               >
-                <Select>
-                  <Select.Option value={8}>8</Select.Option>
-                  <Select.Option value={9}>9</Select.Option>
-                  <Select.Option value={10}>10</Select.Option>
-                  <Select.Option value={11}>11</Select.Option>
-                  <Select.Option value={12}>12</Select.Option>
+                <Select  placeholder="Grade">
+                  <Select.Option value={1}>8</Select.Option>
+                  <Select.Option value={2}>9</Select.Option>
+                  <Select.Option value={3}>10</Select.Option>
+                  <Select.Option value={4}>11</Select.Option>
+                  <Select.Option value={5}>12</Select.Option>
                 </Select>
               </Form.Item>
               <Form.Item
-                label="Subject"
+              
                 name="subject"
                 rules={[
                   // { required: true, message: "Please select the subjects" },
@@ -237,14 +255,14 @@ const Learner: React.FC = () => {
                     mode="multiple"
                     allowClear
                     style={{ width: "100%" }}
-                    placeholder="Please select"
+                    placeholder="Subjects"
                     onChange={handleChange}
                     options={options}
                   />
                 </Space>
               </Form.Item>
               <Form.Item
-                label="Date of Birth"
+              
                 name="dateOfBirth"
                 rules={[{ required: true }]}
               >
@@ -253,7 +271,7 @@ const Learner: React.FC = () => {
             </div>
           </div>
 
-          <Form.Item wrapperCol={{ offset: 4, span: 14 }}>
+          <Form.Item wrapperCol={{ offset: 10, span: 14 }}>
             <Button type="primary" htmlType="submit">
               Submit
             </Button>

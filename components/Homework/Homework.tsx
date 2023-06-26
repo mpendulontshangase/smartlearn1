@@ -13,62 +13,54 @@ import {
 import { useHomework } from "../../Providers/Homework";
 import { useTeacher } from "../../Providers/Teacher";
 import styles from "./style.module.css";
-import { PlusOutlined } from "@ant-design/icons";
+import { InboxOutlined, PlusOutlined } from "@ant-design/icons";
 import { IHomework } from "../../Providers/Homework/context";
+import { useUser } from "../../Providers/User";
 
 const Homework: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [teacherId, setTeacherId] = useState(
-    "002771c4-40ed-4271-bfc5-08db708d45f9"
-  );
-  const [fileList, setFileList] = useState([]);
+  const { getUserDetails, personInfo } = useUser();
+  const [file, setFile] = useState(null)
   const [uploadedFile, setUploadedFile] = useState([]);
   const uploadRef = useRef(null);
   const { CreateHomework } = useHomework();
+  // const [form] = Form.useForm();
+  const { Dragger } = Upload;
 
-  const handleBeforeUpload = (file) => {
-    setFileList([]);
-    setUploadedFile(file);
-    return false;
-  };
-
-  const handleUpload = ({ file }) => {
-    if (file.status !== "uploading") {
-      setUploadedFile(file);
-    }
-  };
-
-  const { ViewbyUserIdTeacher } = useTeacher();
-
-  useEffect(() => {
-   
-  }, []);
-
-  const onFinish = (values:IHomework) => {
-    const formData = new FormData();
-
-    formData.append("teacher_Id", String(values.teacher_Id));
-    formData.append("homeworkDescription", String(values.homeworkDescription));
-    formData.append("due_Date", String(values.due_Date));
-    formData.append("subject", String(values.subject));
-    formData.append("grade", String(values.grade));
-    formData.append("id", String(values.id));
  
-
-    const fileList = uploadRef.current.fileList;
-    if (fileList.length > 0) {
-      const file = fileList[0];
-      formData.append("file", file);
+  const handleFileChange = (info) => {
+    if (info.fileList.length > 0) {
+      const uploadedFile = info.fileList[0].originFileObj;
+      setFile(uploadedFile);
+    } else {
+      setFile(null);
     }
-
-  
-    // CreateHomework(formData);
-    console.log("Success:", formData);
-   
   };
 
+  // const teacher_Id =personInfo
+
+
+
+  const onFinish = (values) => {
+    const { teacher_Id, ...restValues } = values; 
+  
+    const formData = new FormData();
+    formData.append("grade", restValues.grade);
+    formData.append("teacher_Id", teacher_Id);
+    formData.append("subject", restValues.subject);
+    formData.append("homeworkDescription", restValues.homeworkDescription);
+    formData.append("due_Date", restValues.due_Date.toISOString());
+    formData.append("file", restValues.file[0]);
+  
+
+    CreateHomework(formData);
+  };
+  
+  
+  
+  
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+   
   };
 
   const showModal = () => {
@@ -109,6 +101,7 @@ const Homework: React.FC = () => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
+           
           >
             <Form.Item label="Grade" name="grade">
               <Select>
@@ -129,26 +122,24 @@ const Homework: React.FC = () => {
             <Form.Item label="Due Date" name="due_Date">
               <DatePicker />
             </Form.Item>
-            <Form.Item label="Upload" name="upload">
-              <Upload
-                name="image"
-                listType="picture-card"
-                className={styles.upload}
-                showUploadList={{ showPreviewIcon: false }}
-                beforeUpload={handleBeforeUpload}
-                onChange={handleUpload}
-                ref={uploadRef}
-               
-                fileList={fileList}
-              >
-                <div>
-                  <PlusOutlined />
-                  <div className="ant-upload-text">Upload</div>
-                </div>
-              </Upload>
-            </Form.Item>
+            <Form.Item
+            name="file"
+            rules={[{ required: true, message: 'Please upload an image' }]}
+          >
+            <Dragger
+              beforeUpload={() => false} // Prevent default upload behavior
+              onChange={handleFileChange}
+              fileList={file ? [file] : []}
+            >
+              <p className="ant-upload-drag-icon">
+                {/* Add an upload icon */}
+                <InboxOutlined />
+              </p>
+              <p className="ant-upload-text">Click or drag file to this area to upload</p>
+            </Dragger>
+          </Form.Item>
             <Form.Item label="description" name="homeworkDescription">
-              <Input  />
+              <Input />
             </Form.Item>
 
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

@@ -18,17 +18,19 @@ export interface ILearner {
     passport?: string;
     grade?: string;
     subject?: string;
+    subjectDisplay?:[];
+    parent_Id:string;
 }
 
 export interface ILearnerStateContext {
   readonly Update?: ILearner;
   readonly Create?: ILearner;
   readonly deletedLearnerId?: string;
-  readonly View?: ILearner[];
+  readonly ViewL?: ILearner[];
 }
 
 export const INITIAL_STATE: ILearnerStateContext = {
-  View: [],
+  ViewL: [],
   deletedLearnerId: undefined,
   Update: undefined,
   Create: undefined,

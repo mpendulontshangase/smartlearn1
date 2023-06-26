@@ -75,7 +75,7 @@ export const getToken = () => {
   }
 };
 
-// console.log("getttt",getToken().user.UserId)
+
 
 export const removeAccessToken = () => {
   try {

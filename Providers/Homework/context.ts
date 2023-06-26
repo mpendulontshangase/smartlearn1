@@ -2,14 +2,16 @@ import { createContext } from "react";
 
 export interface IHomework {
     id: string;
-    homeworkDescription?:string;
-    due_Date:any;
-   
-    grade:string;
-    subject:string
-    file?: string;  
-    teacher_Id:any; 
-}
+    homeworkDescription?: string;
+    due_Date: Date;
+    grade: string;
+    subject: string;
+    file?: string; 
+    teacher_Id: string;
+    subjectDisplay?:[];
+    gradeName?:string;
+  }
+  
 
 export interface IHomeworkStateContext {
   readonly Update?: IHomework;
@@ -27,7 +29,7 @@ export const INITIAL_STATE: IHomeworkStateContext = {
 
 export interface IHomeworkActionContext {
   UpdateHomework?: (payload: IHomework) => void;
-  CreateHomework?: (payload: IHomework) => void;
+  CreateHomework?: (payload: FormData) => void;
   DeleteHomework?: (payload: string) => void;
   ViewHomework?: () => void;
 }
@@ -35,7 +37,7 @@ export interface IHomeworkActionContext {
 const HomeworkContext = createContext<IHomeworkStateContext>(INITIAL_STATE);
 
 const HomeworkActionContext = createContext<IHomeworkActionContext>({
-    UpdateHomework: undefined,
+  UpdateHomework: undefined,
   CreateHomework: undefined,
   DeleteHomework: undefined,
   ViewHomework: undefined,

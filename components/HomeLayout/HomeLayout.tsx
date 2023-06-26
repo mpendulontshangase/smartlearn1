@@ -31,7 +31,7 @@ const HomeLayout = ({ children, title = "Smart Learn" }: Props) => (
             <Link href="/AdminDashboard">Admin</Link>
           </li>
           <li className={styles.navbarMenuItem}>
-            <Link href="/contact">Learner</Link>
+            <Link href="/LearnerDashboard">Learner</Link>
           </li>
           <li className={styles.navbarMenuItem}>
             <Link href="/TeacherDashboard">Teacher</Link>
@@ -61,10 +61,7 @@ const HomeLayout = ({ children, title = "Smart Learn" }: Props) => (
       </div>
     </nav>
     {children}
-    <footer className={styles.footer}>
-      <hr />
-      <span>@intozami zimayakayaka</span>
-    </footer>
+  
   </div>
 );
 

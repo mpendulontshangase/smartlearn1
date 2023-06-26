@@ -1,22 +1,8 @@
-import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Modal,
-  Form,
-  Input,
-  InputNumber,
-  Empty,
-  Select,
-
-  DatePicker,
-} from "antd";
-
+import React, { useState } from "react";
+import { Button, Modal, Form, Input, Select } from "antd";
 import styles from "./style.module.css";
-import Link from "next/link";
-
 import { useMessage } from "../../Providers/Messages";
 import { IMessage } from "../../Providers/Messages/context";
-
 
 const SendMessage = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -27,29 +13,24 @@ const SendMessage = () => {
 
   const handleOk = () => {
     setOpen(false);
-    console.log("I am clicked as a Saved");
   };
 
   const handleCancel = () => {
-    console.log("I am clicked as a cancel");
     setOpen(false);
   };
 
-  const { CreateMessage, Create } = useMessage();
-
-  useEffect(() => {
-    if (Create !== null) {
-      console.log(Create);
-    }
-  }, []);
+  const { CreateMessage } = useMessage();
 
   const onFinish = (values: IMessage) => {
-    console.log("Form values:", values);
     if (CreateMessage) {
-      CreateMessage(values);
+      const selectedSubjects = values.subject || [];
+      const messageWithSubjects = { ...values, subject: selectedSubjects };
+      console.log(messageWithSubjects)
+      CreateMessage(messageWithSubjects);
     }
     handleOk();
   };
+
   const { Option } = Select;
 
   return (
@@ -60,7 +41,7 @@ const SendMessage = () => {
 
       <Modal
         width={400}
-        title="Add New SendMessage"
+        title="Add New Message"
         visible={open}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -68,7 +49,12 @@ const SendMessage = () => {
           <Button key="cancel" onClick={handleCancel}>
             Cancel
           </Button>,
-          <Button key="submit" htmlType="submit" type="primary" form="myForm">
+          <Button
+            key="submit"
+            htmlType="submit"
+            type="primary"
+            form="myForm"
+          >
             Send
           </Button>,
         ]}
@@ -84,13 +70,13 @@ const SendMessage = () => {
             <label className={styles.label}>
               Grade<span className={styles.required}></span>
             </label>
-            <Form.Item name="subject">
-              <Select>
-                <Option value="8">8</Option>
-                <Option value="9">9</Option>
-                <Option value="10">10</Option>
-                <Option value="11">11</Option>
-                <Option value="12">12</Option>
+            <Form.Item name="grade">
+              <Select placeholder="grade">
+                <Option value={1}>8</Option>
+                <Option value={2}>9</Option>
+                <Option value={3}>10</Option>
+                <Option value={4}>11</Option>
+                <Option value={5}>12</Option>
               </Select>
             </Form.Item>
           </div>
@@ -99,13 +85,14 @@ const SendMessage = () => {
               Subject<span className={styles.required}></span>
             </label>
             <Form.Item name="subject">
-              <Select>
-                <Option value="8">isiZulu</Option>
-                <Option value="9">English</Option>
-                <Option value="10">Mathematics</Option>
-                <Option value="11">LO</Option>
-                <Option value="12">Social Sciences</Option>
-                <Option value="13">Life Sciences</Option>
+              <Select mode="multiple" placeholder="subject">
+                <Option value={1}>isiZulu</Option>
+                <Option value={2}>English</Option>
+                <Option value={4}>Mathematics</Option>
+                <Option value={8}>Life Orientation</Option>
+                <Option value={16}>Technology</Option>
+                <Option value={32}>NS</Option>
+                <Option value={64}>EMS</Option>
               </Select>
             </Form.Item>
           </div>

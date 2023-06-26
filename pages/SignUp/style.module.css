@@ -16,7 +16,7 @@
 }
 
 .smartlearn {
-  color: green;
+  color: #69b1ff;
   font-family: "Arial", sans-serif;
   font-size: 4vh;
 }
@@ -39,10 +39,10 @@
   margin-top: 20px;
 }
 .signupButton{
-  background-color: green;
+  background-color: #69b1ff;
 }
 .signupLink{
-  color: green;
+  color: #69b1ff;
 
 }
 

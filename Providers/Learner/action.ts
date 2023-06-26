@@ -12,4 +12,4 @@ export enum LearnerActionEnum{
 export const AddLearnerRequestAction = createAction<ILearnerStateContext,ILearner>(LearnerActionEnum.AddLearnerRequest,(Create)=>({Create}))
 export const UpdateLearnerRequestAction = createAction<ILearnerStateContext,ILearner>(LearnerActionEnum.UpdateLearnerRequest,(Update)=>({Update}))
 export const DeleteLearnerRequestAction = createAction<ILearnerStateContext,string>(LearnerActionEnum.DeleteLearnerRequest,(deletedLearnerId)=>({deletedLearnerId}))
-export const ViewRequestAction = createAction<ILearnerStateContext,Array<ILearner>>(LearnerActionEnum.ViewLearnerRequest,(View)=>({View}))
+export const ViewRequestAction = createAction<ILearnerStateContext,Array<ILearner>>(LearnerActionEnum.ViewLearnerRequest,(ViewL)=>({ViewL}))

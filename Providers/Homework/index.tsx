@@ -27,17 +27,17 @@ import axios from "axios";
   
   
 
-    const CreateHomework = async (payload: IHomework) => {
+    const CreateHomework = async (payload: FormData) => {
       try {
-        console.log(payload);
     
-        await axios.post(CreateUrl, payload, {
+    
+        let response = await axios.post(CreateUrl, payload, {
           headers: {
             "Content-Type": "application/json",
           },
         });
     
-        dispatch(AddHomeworkRequestAction(payload));
+        dispatch(AddHomeworkRequestAction(response.data));
         message.success("Homework added successfully");
       } catch (error) {
         // Handle the error here
@@ -83,7 +83,7 @@ import axios from "axios";
             }
             return res.json().then((data) => {
               dispatch(UpdateHomeworkRequestAction(data.result));
-              console.log(data.result);
+             
               message.success("Homework updated successfully");
             });
           })
@@ -105,7 +105,7 @@ import axios from "axios";
           const homeworkData = response.data.result;
           dispatch(ViewRequestAction(homeworkData));
 
-        //   console.log("qqqq",response.data)
+       
         } catch (error) {
           message.error("An error occurred while trying to get Homework from the DB");
         }

@@ -12,9 +12,12 @@ import { IParent } from "../../Providers/Parent/context";
 import ViewModel from "../ViewParent";
 import { useParent } from "../../Providers/Parent";
 import Link from "next/link";
+import Learner from "../AddLearner/Learner";
+import { useLearner } from "../../Providers/Learner";
 
 const AdminParent: FC = () => {
   const { View, DeleteParent, ViewParent } = useParent();
+  const { ViewL, ViewLearner } = useLearner();
 
   const [loginUser, setUsername] = useState("");
 
@@ -47,16 +50,12 @@ const AdminParent: FC = () => {
       sorter: (a: IParent, b: IParent) =>
         a.surname.localeCompare(b.surname),
     },
+ 
     {
-      title: "Relationship",
-      dataIndex: "RelationshipName",
-      key: "RelationshipName",
-      //   sorter: (a: IParent, b: IParent) => a.Grade.localeCompare(b.Grade),
-    },
-    {
-      title: "Learner",
-      key: "learner",
-      dataIndex: "learner",
+      title: "Email Address",
+      key: "emailAddress",
+      dataIndex: "emailAddress",
+     
     },
     {
       title: "Action",

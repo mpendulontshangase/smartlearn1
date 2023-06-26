@@ -36,6 +36,7 @@ function MessagesComp() {
         reply: replyContent,
         message_Description: message.message_Description,
         time_sent: currentTime,
+        
       };
 
       UpdateMessage(messagePayload);

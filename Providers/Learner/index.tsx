@@ -27,7 +27,7 @@ import axios from "axios";
   
     const CreateLearner = async (payload: ILearner) => {
       try {
-        console.log(payload);
+      
     
         await axios.post(CreateLearnerUrl, payload, {
           headers: {
@@ -89,7 +89,7 @@ import axios from "axios";
             }
             return res.json().then((data) => {
               dispatch(UpdateLearnerRequestAction(data.result));
-              console.log(data.result);
+            
               message.success("Learner updated successfully");
             });
           })
@@ -109,7 +109,7 @@ const ViewLearner = async () => {
       },
     });
     dispatch(ViewRequestAction(response.data.result));
-    console.log("Learrner=",response.data.result)
+   
 
   } catch (error) {
     message.error("An error occurred while trying to get Learner from the DB");

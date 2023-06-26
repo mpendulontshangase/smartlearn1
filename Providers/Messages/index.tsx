@@ -35,7 +35,7 @@ import React, {
   
     const CreateMessage = async (payload: IMessage) => {
       try {
-        console.log("ww", payload);
+       
   
         const response = await axios.post(CreateUrl, payload, {
           headers: {
@@ -88,7 +88,7 @@ import React, {
   
         if (response.status === 200) {
           dispatch(UpdateMessageRequestAction(response.data.result));
-          console.log(response.data.result);
+         
           message.success("Message updated successfully");
         } else {
           throw new Error("Request failed with status " + response.status);
@@ -119,7 +119,7 @@ import React, {
     
   
   
-    // console.log("watt::",userIdRetriever)
+
   
   
     // const ViewbyUserIdMessage = async (userIdRetriever) => {

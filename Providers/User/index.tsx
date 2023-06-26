@@ -25,7 +25,7 @@ import {
 import { message } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { DASHBOARD_PAGE_URL, LOGIN_URL } from "../../routes";
+import {  ADMIN_DASHBOARD_PAGE_URL, LEARNER_DASHBOARD_PAGE_URL, LOGIN_URL, PARENT_DASHBOARD_PAGE_URL, TEACHER_DASHBOARD_PAGE_URL } from "../../routes";
 import { getToken } from "../../utils/Decoder";
 import axios from "axios";
 
@@ -35,7 +35,6 @@ const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   const { mutate: loginUserHttp } = useMutate({
     path: "https://localhost:44311/api/TokenAuth/Authenticate",
     verb: "POST",
-  
   });
   const [state, dispatch] = useReducer(UserReducer, INITIAL_STATE);
 
@@ -47,13 +46,8 @@ const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   });
 
   const createUser = async (payload: IUser) => {
-    console.log("am in create");
-
     try {
-      console.log("nalapha ngisasekhona");
-
       const response = await createUserHttp(payload);
-      console.log("response::", response);
 
       if (response.success) {
         message.success("User successfully created");
@@ -63,68 +57,81 @@ const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
         message.error("Failed to dispatch the user on creation");
       }
     } catch (error) {
-     
       console.error("User creation error:", error);
       message.error("An error occurred during user creation");
     }
   };
 
   const loginUser = async (payload: ILogin) => {
-    console.log("am in");
+  
     try {
-      console.log("data");
-
       const response = await loginUserHttp(payload);
-      
-      if (response.success && response.result.accessToken) {
-        localStorage.setItem("token", response.result.accessToken);
-        dispatch(loginUserRequestAction(response));
-        message.success("User successfully logged in");
-        push(DASHBOARD_PAGE_URL);
-      } else {
-        message.error("Incorrect email or password");
+      if (response.success) {
+          localStorage.setItem('token', response.result.accessToken);
+          dispatch(loginUserRequestAction(response.result));
+          // push('/LearnerDashboard')
+          const token = localStorage.getItem('token');
+          const rolesResponse = await axios.get(`https://localhost:44311/api/services/app/User/GetUserRoles?userId=${response.result.userId}`, {
+              headers: {
+                  Authorization: `Bearer ${token}`
+              }
+          });
+          const roles = rolesResponse.data.result;
+          
+          if (roles.includes('Parent')) {
+            getUserDetails(response.result?.userId);
+              push(PARENT_DASHBOARD_PAGE_URL);
+          } else if (roles.includes('Teacher')) {
+              getUserDetails(response.result.userId);
+              
+              push(TEACHER_DASHBOARD_PAGE_URL);
+          } 
+          else if (roles.includes('Learner')) {
+            getUserDetails(response.result.userId);
+            
+            push(LEARNER_DASHBOARD_PAGE_URL);
+        }
+        else if (roles.includes('Admin')) {
+          getUserDetails(response.result.userId);
+          
+          push(ADMIN_DASHBOARD_PAGE_URL);
       }
-    } catch (error) {
+          else {
+            getUserDetails(response.result?.userId);
+              message.error("User not authorized!");
+          }
+      } else {
+          message.error('Invalid username or password');
+      }
+  }
+     catch (error) {
       console.error("Login error:", error);
       message.error("An error occurred during login");
     }
   };
   // var USER = getToken()?.user.UserId;
 
-
   let theeid;
 
-  if (typeof localStorage !== 'undefined') {
-    theeid =  JSON.parse(localStorage.getItem('USERID'));
-
-    console.log("sssss",theeid)
-
-    const thok = getToken()?.user.UserId;
-
-    console.log("xxxx",thok)
-
-    
+  if (typeof localStorage !== "undefined") {
+    theeid = JSON.parse(localStorage.getItem("USERID"));
   }
 
-  // const getUserDetails = async (thok) => {
-  //   try {
-  //     console.log("kwe",thok)
-  //     const response = await axios.get(`https://localhost:44311/api/services/app/Teacher/GetByUserId?userId=${thok}`, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     dispatch(getUserDetailsRequestAction(response.data.result.id));
-  //     console.log('aybo',response.data.result.id)
-  //     localStorage.setItem("thy",response.data.result.id)
-
-     
-  //   } catch (error) {
-  //     message.error(
-  //       "An error occurred while trying to get Teacher from the DB"
-  //     );
-  //   }
-  // };
+  const getUserDetails = async (theeid) => {
+    try {
+      const response = await axios.get(
+        `https://localhost:44311/api/services/app/Learner/GetPersonInfo?userId=${theeid}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      dispatch(getUserDetailsRequestAction(response.data.result));
+    } catch (error) {
+      message.error("An error occurred while trying to get Person info");
+    }
+  };
 
   const logoutUser = () => {
     dispatch(logOutUserRequestAction());
@@ -136,7 +143,7 @@ const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
     <UserContext.Provider value={state}>
       <UserActionContext.Provider
         value={{
-          // getUserDetails,
+          getUserDetails,
           loginUser,
           createUser,
           logoutUser,

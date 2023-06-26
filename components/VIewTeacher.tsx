@@ -149,7 +149,7 @@ const ViewModel: React.FC<ITeacher> = ({
                   <span>{gender}</span>
                 )}
               </Form.Item>
-              <Form.Item label="Grade" name="grade">
+              <Form.Item label="Grade" name="gradeName">
                 {edit ? (
                   <Select>
                     <Option value="8">8</Option>
@@ -163,7 +163,7 @@ const ViewModel: React.FC<ITeacher> = ({
                 )}
               </Form.Item>
 
-              <Form.Item label="Subject" name="subject">
+              <Form.Item label="Subject" name="subjectDisplay">
                 {edit ? (
                   <Select>
                     <Option value="8">isiZulu</Option>

@@ -37,7 +37,7 @@ const SideBar: React.FC = () => {
 
   useEffect(() => {
     const decodedToken = getToken();
-    console.log("thee",decodedToken)
+
     if (decodedToken) {
       const { username, email } = decodedToken.user;
       setId(id || '');
@@ -45,7 +45,7 @@ const SideBar: React.FC = () => {
       setEmail(email || '');
     }
   }, []);
-  console.log("userin");
+
   
 
 const getUserInfo = async () => {
@@ -53,7 +53,7 @@ const getUserInfo = async () => {
     const response = await axios.get(CurrentUser);
     if (response.data && response.data.success) {
       const userInfo = response.data;
-      console.log("userin",userInfo);
+     
     } else {
       throw new Error("Failed to fetch user info");
     }

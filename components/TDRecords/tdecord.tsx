@@ -41,8 +41,8 @@ const TDRecords: FC = () => {
     {
         
       title: "Subject",
-      dataIndex: "subjectName",
-      key: "subjectName",
+      dataIndex: "subjectDisplay",
+      key: "subjectDisplay",
       sorter: (a: IHomework, b: IHomework) => a.subject.localeCompare(b.subject),
       filteredValue: [searchedText],
    
@@ -53,12 +53,7 @@ const TDRecords: FC = () => {
         key: "due_Date",
     
       },
-      {
-        title: "File",
-        dataIndex: "file",
-        key: "file",
     
-      },
 
       
 

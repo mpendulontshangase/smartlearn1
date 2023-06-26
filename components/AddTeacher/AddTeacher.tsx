@@ -8,6 +8,7 @@ import {
   Empty,
   Select,
   DatePicker,
+  Space,
 } from "antd";
 import { ITeacher } from "../../Providers/Teacher/context";
 import { useTeacher } from "../../Providers/Teacher";
@@ -17,17 +18,19 @@ import Link from "next/link";
 const AddTeacher = () => {
   const [open, setOpen] = useState<boolean>(false);
 
+  const [selectedSubjects, setSelectedSubjects] = useState([]);
+
   const showModal = () => {
     setOpen(true);
   };
 
   const handleOk = () => {
     setOpen(false);
-    console.log("I am clicked as a Saved");
+
   };
 
   const handleCancel = () => {
-    console.log("I am clicked as a cancel");
+
     setOpen(false);
   };
 
@@ -35,18 +38,41 @@ const AddTeacher = () => {
 
   useEffect(() => {
     if (Create !== null) {
-      console.log(Create);
+     
     }
   }, []);
 
-  const onFinish = (values: ITeacher) => {
-    console.log("Form values:", values);
-    if (CreateTeacher) {
-      CreateTeacher(values);
-    }
-    handleOk();
+  const onFinish = (values) => {
+    
+    const subject = selectedSubjects;
+
+    
+    const mergedValues = { ...values, subject };
+  
+  
+    
+  
+  
+
+
+    CreateTeacher(mergedValues)
+  
   };
   const { Option } = Select;
+  const handleChange = (selectedSubjects) => {
+    setSelectedSubjects(selectedSubjects);
+  };
+
+  const options = [
+    { label: "IsiZulu", value: 1 },
+    { label: "English", value: 2 },
+    { label: "Mathematics", value: 4 },
+    { label: "Life Orientation", value: 8 },
+    { label: "Technology", value: 16 },
+    { label: "NS", value: 32 },
+    { label: "EMS", value: 64 },
+  
+  ];
 
   return (
     <>
@@ -78,10 +104,9 @@ const AddTeacher = () => {
             <div className={styles.maingrid}>
               <div className={styles.fgrid}>
                 <div className={styles.formGroup}>
-                  <label>
-                    Name<span className={styles.required}>*</span>
-                  </label>
+                  
                   <Form.Item
+                     label="Name"
                     name="name"
                     rules={[
                       { required: true, message: "Please enter your name" },
@@ -91,10 +116,9 @@ const AddTeacher = () => {
                   </Form.Item>
                 </div>
                 <div className={styles.formGroup}>
-                  <label>
-                    ID Number<span className={styles.required}>*</span>
-                  </label>
+                 
                   <Form.Item
+                     label="ID Number"
                     name="idNumber"
                     rules={[
                       {
@@ -107,23 +131,23 @@ const AddTeacher = () => {
                   </Form.Item>
                 </div>
                 <div className={styles.formGroup}>
-                  <label>Passport</label>
-                  <Form.Item name="passport">
+                  
+                  <Form.Item
+                     label="passport" name="passport">
                     <Input placeholder="Passport" />
                   </Form.Item>
                 </div>
                 <div className={styles.formGroup}>
-                  <label>Second Name</label>
-                  <Form.Item name="secondName">
+                 
+                  <Form.Item
+                     label="Second Name" name="secondName">
                     <Input placeholder="Second Name" />
                   </Form.Item>
                 </div>
                 <div className={styles.formGroup}>
-                  <label>
-                    Surname
-                    <span className={styles.required}>*</span>
-                  </label>
+                  
                   <Form.Item
+                     label="Surname"
                     name="surname"
                     rules={[
                       { required: true, message: "Please enter your surname" },
@@ -133,11 +157,9 @@ const AddTeacher = () => {
                   </Form.Item>
                 </div>
                 <div className={styles.formGroup}>
-                  <label>
-                    Username
-                    <span className={styles.required}>*</span>
-                  </label>
+                  
                   <Form.Item
+                     label="Username"
                     name="username"
                     rules={[
                       { required: true, message: "Please enter your username" },
@@ -148,10 +170,9 @@ const AddTeacher = () => {
                 </div>
                 
                 <div className={styles.formGroup}>
-                  <label>
-                    Password<span className={styles.required}>*</span>
-                  </label>
+                 
                   <Form.Item
+                     label="Password"
                     name="password"
                     rules={[
                       { required: true, message: "Please enter your password" },
@@ -163,11 +184,9 @@ const AddTeacher = () => {
               </div>
               <div className={styles.sgrid}>
                 <div className={styles.formGroup}>
-                  <label>
-                    Phone Number
-                    <span className={styles.required}>*</span>
-                  </label>
+                 
                   <Form.Item
+                     label="Phone Number"
                     name="phoneNumber"
                     rules={[
                       {
@@ -180,10 +199,9 @@ const AddTeacher = () => {
                   </Form.Item>
                 </div>
                 <div className={styles.formGroup}>
-                  <label>
-                    Email Address<span className={styles.required}>*</span>
-                  </label>
+                
                   <Form.Item
+                     label="Email Address"
                     name="EmailAddress"
                     rules={[
                       {
@@ -196,34 +214,33 @@ const AddTeacher = () => {
                   </Form.Item>
                 </div>
                 <div className={styles.formGroup}>
-                  <label>Street Address</label>
-                  <Form.Item name="streetAddress">
+                  
+                  <Form.Item
+                     label="Street Address" name="streetAddress">
                     <Input placeholder="Street Address" />
                   </Form.Item>
                 </div>
                 <div className={styles.formGroup}>
-                  <label>
-                    Gender<span className={styles.required}>*</span>
-                  </label>
+                  
                   <Form.Item
+                     label="Gender"
                     name="gender"
                     rules={[
                       { required: true, message: "Please select your gender" },
                     ]}
                   >
-                    <Select>
-                      <Option value="Male">Male</Option>
-                      <Option value="Female">Female</Option>
-                      <Option value="Other">Other</Option>
+                    <Select placeholder="Gender">
+                      <Option value={1}>Male</Option>
+                      <Option value={2}>Female</Option>
+                      <Option value={3}>Other</Option>
                     </Select>
                   </Form.Item>
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label>
-                    Date of Birth<span className={styles.required}>*</span>
-                  </label>
+                 
                   <Form.Item
+                     label="Date of Birth"
                     name="dateOfBirth"
                     rules={[
                       {
@@ -236,44 +253,41 @@ const AddTeacher = () => {
                   </Form.Item>
                 </div>
                 <div className={styles.formGroup}>
-                  <label>
-                    Grade<span className={styles.required}>*</span>
-                  </label>
-                  <Form.Item
-                    name="subject"
-                    rules={[
-                      { required: true, message: "Please select your subject" },
-                    ]}
-                  >
-                     <Select>
-                    <Option value="8">8</Option>
-                    <Option value="9">9</Option>
-                    <Option value="10">10</Option>
-                    <Option value="11">11</Option>
-                    <Option value="12">12</Option>
                 
-                  </Select>
-                  </Form.Item>
+                  <Form.Item
+                label="Grade"
+                name="grade"
+                rules={[{ required: true, message: "Please select the grade" }]}
+              >
+                <Select placeholder="Grade">
+                  <Select.Option value={1}>8</Select.Option>
+                  <Select.Option value={2}>9</Select.Option>
+                  <Select.Option value={3}>10</Select.Option>
+                  <Select.Option value={4}>11</Select.Option>
+                  <Select.Option value={5}>12</Select.Option>
+                </Select>
+              </Form.Item>
                 </div>
                 <div className={styles.formGroup}>
-                  <label>
-                    Subject<span className={styles.required}>*</span>
-                  </label>
+                
                   <Form.Item
-                    name="subject"
-                    rules={[
-                      { required: true, message: "Please select your subject" },
-                    ]}
-                  >
-                     <Select>
-                    <Option value="8">isiZulu</Option>
-                    <Option value="9">English</Option>
-                    <Option value="10">Mathematics</Option>
-                    <Option value="11">LO</Option>
-                    <Option value="12">Social Sciences</Option>
-                    <Option value="12">Life Sciences</Option>
-                  </Select>
-                  </Form.Item>
+                label="Subject"
+                name="subject"
+                // rules={[
+                //   { required: true, message: "Please select the subjects" },
+                // ]}
+              >
+                <Space style={{ width: "100%" }} direction="vertical">
+                  <Select
+                    mode="multiple"
+                    allowClear
+                    style={{ width: "100%" }}
+                    placeholder="Please select"
+                    onChange={handleChange}
+                    options={options}
+                  />
+                </Space>
+              </Form.Item>
                 </div>
             
               </div>

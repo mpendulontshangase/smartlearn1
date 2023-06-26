@@ -10,8 +10,8 @@ import { HomeworkProvider } from "../Providers/Homework";
 import { MessageProvider } from "../Providers/Messages";
 
 function App({ Component, pageProps }) {
-  const router = useRouter();
-  // const isLoginPage = router.pathname === "/login"; // Update the path based on your login page
+ 
+
 
   return (
     <>

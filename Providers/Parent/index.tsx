@@ -27,7 +27,7 @@ import axios from "axios";
   
     const CreateParent = async (payload: IParent) => {
       try {
-        console.log(payload);
+
     
         await fetch(CreateUrl, {
           method: "POST",
@@ -97,7 +97,7 @@ import axios from "axios";
             }
             return res.json().then((data) => {
               dispatch(UpdateParentRequestAction(data.result));
-              console.log(data.result);
+            
               message.success("Parent updated successfully");
             });
           })

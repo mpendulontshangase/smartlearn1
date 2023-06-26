@@ -8,15 +8,15 @@ import HomeLayout from "../../components/HomeLayout/HomeLayout";
 const { Option } = Select;
 
 const SignUp: React.FC = () => {
-  console.log("Received values of form: ");
+ 
 
   const { createUser } = useUser();
   const onFinish = (values: any) => {
-    console.log(values);
+  
     if (createUser) {
       createUser(values);
     }
-    console.log("Received values of form: ", values);
+
   };
 
   return (
@@ -36,46 +36,46 @@ const SignUp: React.FC = () => {
             <div style={{display:"flex" ,gap:"50px", backgroundColor:"white", padding:"20px", borderRadius:"10px",width:"60vw"}}>
             <div style={{width:"100%"}}>
             <div className={styles.signupInput}>
-              <Form.Item
+              <Form.Item wrapperCol={{ offset: 5, span: 16 }}
                 name="name"
-                label="Name"
+              
                 rules={[{ required: true, message: "Please enter your name" }]}
               >
                 <Input placeholder="Name" />
               </Form.Item>
             </div>
             <div className={styles.signupInput}>
-              <Form.Item
+              <Form.Item wrapperCol={{ offset: 5, span: 16 }}
                 name="idNumber"
-                label="ID Number"
+             
                 rules={[{ required: true, message: "Please enter your ID number" }]}
               >
                 <Input placeholder="ID Number" />
               </Form.Item>
             </div>
             <div className={styles.signupInput}>
-              <Form.Item name="passport" label="Passport">
+              <Form.Item wrapperCol={{ offset: 5, span: 16 }} name="passport" >
                 <Input placeholder="Passport" />
               </Form.Item>
             </div>
             <div className={styles.signupInput}>
-              <Form.Item name="secondName" label="Second Name">
+              <Form.Item wrapperCol={{ offset: 5, span: 16 }} name="secondName" >
                 <Input placeholder="Second Name" />
               </Form.Item>
             </div>
             <div className={styles.signupInput}>
-              <Form.Item
+              <Form.Item wrapperCol={{ offset: 5, span: 16 }}
                 name="surname"
-                label="Surname"
+               
                 rules={[{ required: true, message: "Please enter your surname" }]}
               >
                 <Input placeholder="Surname" />
               </Form.Item>
             </div>
             <div className={styles.signupInput}>
-              <Form.Item
+              <Form.Item wrapperCol={{ offset: 5, span: 16 }}
                 name="password"
-                label="Password"
+               
                 rules={[{ required: true, message: "Please enter your password" }]}
               >
                 <Input type="password" placeholder="Password" />
@@ -85,9 +85,9 @@ const SignUp: React.FC = () => {
 
             <div style={{width:"100%"}}>
             <div className={styles.signupInput}>
-              <Form.Item
+              <Form.Item wrapperCol={{ offset: 5, span: 16 }}
                 name="phoneNumber"
-                label="Phone Number"
+               
                 rules={[
                   { required: true, message: "Please enter your phone number" },
                 ]}
@@ -96,9 +96,9 @@ const SignUp: React.FC = () => {
               </Form.Item>
             </div>
             <div className={styles.signupInput}>
-              <Form.Item
+              <Form.Item wrapperCol={{ offset: 5, span: 16 }}
                 name="emailAddress"
-                label="Email Address"
+             
                 rules={[
                   {
                     required: true,
@@ -110,14 +110,14 @@ const SignUp: React.FC = () => {
               </Form.Item>
             </div>
             <div className={styles.signupInput}>
-              <Form.Item name="streetAddress" label="Street Address">
+              <Form.Item wrapperCol={{ offset: 5, span: 16 }} name="streetAddress" >
                 <Input placeholder="Street Address" />
               </Form.Item>
             </div>
             <div className={styles.signupInput}>
-              <Form.Item
+              <Form.Item wrapperCol={{ offset: 5, span: 16 }}
                 name="gender"
-                label="Gender"
+                
                 rules={[{ required: true, message: "Please select your gender" }]}
               >
                 <Select>
@@ -127,10 +127,10 @@ const SignUp: React.FC = () => {
                 </Select>
               </Form.Item>
             </div>
-            <div className={styles.signupInput}>
-              <Form.Item
+            {/* <div className={styles.signupInput}>
+              <Form.Item wrapperCol={{ offset: 5, span: 16 }}
                 name="relationship"
-                label="Relationship"
+              
                 rules={[
                   {
                     required: true,
@@ -144,11 +144,18 @@ const SignUp: React.FC = () => {
                   <Option value="Other">Other</Option>
                 </Select>
               </Form.Item>
-            </div>
+            </div> */}
+           
             <div className={styles.signupInput}>
-              <Form.Item
+              <Form.Item wrapperCol={{ offset: 5, span: 16 }} name="username" >
+                <Input placeholder="Username" />
+              </Form.Item>
+            </div>
+
+            <div className={styles.signupInput}>
+              <Form.Item wrapperCol={{ offset: 5, span:16 }}
                 name="dateOfBirth"
-                label="Date of Birth"
+              
                 rules={[
                   {
                     required: true,
@@ -157,11 +164,6 @@ const SignUp: React.FC = () => {
                 ]}
               >
                 <DatePicker />
-              </Form.Item>
-            </div>
-            <div className={styles.signupInput}>
-              <Form.Item name="username" label="Username">
-                <Input placeholder="Username" />
               </Form.Item>
             </div>
             

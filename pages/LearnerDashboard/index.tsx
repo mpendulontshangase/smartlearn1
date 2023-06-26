@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import Layout from "../../components/Layout";
 import ParentDash from "../../components/ParentDash/ParentDash";
 import WithoutTokenRedirect from "../../components/HOC/HOC";
+import LearnerDash from "../../components/LearnerDash/LearnerDash";
 const { RangePicker } = DatePicker;
 
 const normFile = (e: any) => {
@@ -16,13 +17,13 @@ const normFile = (e: any) => {
   }
   return e?.fileList;
 };
-const ParentDashboard: React.FC = () => {
+const LearnerDashboard: React.FC = () => {
   return (
     <>
   <Layout>
-    <ParentDash/>
+    <LearnerDash/>
   </Layout>
     </>
   );
 };
-export default ParentDashboard;
+export default LearnerDashboard;

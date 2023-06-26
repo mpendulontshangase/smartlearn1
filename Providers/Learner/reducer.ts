@@ -11,31 +11,31 @@ export function LearnerReducer(
     case LearnerActionEnum.AddLearnerRequest:
       return {
         ...incomingState,
-        View: [payload.Create, ...incomingState?.View],
+        ViewL: [payload.Create, ...incomingState?.ViewL],
       };
 
     case LearnerActionEnum.UpdateLearnerRequest:
       const { Update } = payload;
-      const updatedLearnerIndex = incomingState?.View.findIndex(
+      const updatedLearnerIndex = incomingState?.ViewL.findIndex(
         ({ id }) => id === Update?.id
       );
       if (updatedLearnerIndex !== -1) {
         const updatedLearner = {
-          ...incomingState.View[updatedLearnerIndex],
+          ...incomingState.ViewL[updatedLearnerIndex],
           ...Update,
         };
-        const updatedLearnerList = [...incomingState.View];
+        const updatedLearnerList = [...incomingState.ViewL];
         updatedLearnerList[updatedLearnerIndex] = updatedLearner;
-        return { ...incomingState, View: updatedLearnerList };
+        return { ...incomingState, ViewL: updatedLearnerList };
       }
       return incomingState;
 
     case LearnerActionEnum.DeleteLearnerRequest:
       const { deletedLearnerId } = payload;
-      const filtered = [...incomingState?.View].filter(
+      const filtered = [...incomingState?.ViewL].filter(
         ({ id }) => id != deletedLearnerId
       );
-      return { ...incomingState, View: [...filtered] };
+      return { ...incomingState, ViewL: [...filtered] };
     case LearnerActionEnum.ViewLearnerRequest:
       return { ...incomingState, ...payload };
 

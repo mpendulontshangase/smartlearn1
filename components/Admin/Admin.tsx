@@ -12,16 +12,25 @@ import { ILearner } from "../../Providers/Learner/context";
 import ViewModel from "../ViewLearner";
 import { useLearner } from "../../Providers/Learner";
 import Link from "next/link";
+import { useParent } from "../../Providers/Parent";
+
 
 const AdminDash: FC = () => {
-  const { View, DeleteLearner, ViewLearner } = useLearner();
+  const { ViewL, DeleteLearner, ViewLearner } = useLearner();
+  const { View} = useParent();
 
-  console.log("zzzzz",View)
+
 
 
   const [searchedText, setSearchedText] = useState<string>("");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+
+
+  const getParentName = (parent_Id) => {
+    const parent = View.find((parent) => parent.id === parent_Id);
+    return parent ? parent.name : '_';
+  };
 
   const columns: ColumnsType<ILearner> = [
     {
@@ -55,9 +64,11 @@ const AdminDash: FC = () => {
       //   sorter: (a: ILearner, b: ILearner) => a.Grade.localeCompare(b.Grade),
     },
     {
-      title: "Parent",
-      key: "parent",
-      dataIndex: "parent",
+      title: "Email Address",
+      key: "emailAddress",
+      dataIndex: "emailAddress",
+      // render:(parent) =>getParentName(parent)
+      
     },
     {
       title: "Action",
@@ -77,6 +88,7 @@ const AdminDash: FC = () => {
             dateOfBirth={record.dateOfBirth}
             password={record.password}
             age={record.age}
+            parent_Id={record.parent_Id}
           />
           <Popconfirm
             title="Delete Learner"
@@ -101,7 +113,7 @@ const AdminDash: FC = () => {
   useEffect(() => {
     ViewLearner();
 
-    console.log("this is america",ViewLearner())
+   
   }, []);
 
   type deleteProp = {
@@ -150,7 +162,7 @@ const AdminDash: FC = () => {
       </div>
       <Table
         columns={columns}
-        dataSource={View}
+        dataSource={ViewL}
         pagination={{
           current: page,
           pageSize: pageSize,

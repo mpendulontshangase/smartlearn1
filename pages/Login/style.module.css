@@ -2,7 +2,7 @@
 
 .loginContainer {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -17,7 +17,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   .smartlearn {
-    color: green;
+    color: #69b1ff;
     font-family: "Arial", sans-serif;
     font-size: 4vh;
   }
@@ -36,37 +36,34 @@
     }
     
     .loginButtonContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 20px;
+      /* display: flex; */
+      /* flex-direction: column; */
+      /* align-items: center; */
+      /* margin-top: 20px; */
     }
     
     .loginInput {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 10px;
+      /* display: flex; */
+      /* flex-direction: column; */
+      /* margin-bottom: 10px; */
     }
     
     .loginInput input {
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      /* padding: 10px; */
+      /* font-size: 16px; */
+      /* border: 1px solid #ccc; */
+      /* border-radius: 4px; */
     }
     
     .loginInput input:focus {
-      outline: none;
-      border-color: #888;
+      /* outline: none; */
+      /* border-color: #888; */
     }
     
-    .loginInput div {
-      margin-bottom: 10px;
-    }
+
     
     .loginInput button {
-      padding: 10px 20px;
-      font-size: 16px;
+  
       background-color: #f1f1f1;
       border: none;
       border-radius: 4px;

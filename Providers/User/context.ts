@@ -46,6 +46,7 @@ export interface IUserStateContext {
     readonly UserLogOut?: IUser;
     readonly currentUser?: IUser;
     readonly user?: IUser;
+    personInfo?: any;
   }
 
 export const INITIAL_STATE: IUserStateContext = {};

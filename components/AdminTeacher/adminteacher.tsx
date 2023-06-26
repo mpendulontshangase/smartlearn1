@@ -17,7 +17,7 @@ import AddTeacher from "../AddTeacher/AddTeacher";
 const AdminTeacher: FC = () => {
   const { View, DeleteTeacher, ViewTeacher } = useTeacher();
 
-  console.log("valuesss",View)
+
 
   // const [loginUser, setUsername] = useState("");
 
@@ -65,8 +65,8 @@ const AdminTeacher: FC = () => {
       
     {
       title: "Subject",
-      key: "subjectName",
-      dataIndex: "subjectName",
+      key: "subjectDisplay",
+      dataIndex: "subjectDisplay",
     },
     {
       title: "Action",
@@ -86,6 +86,7 @@ const AdminTeacher: FC = () => {
            dateOfBirth={record.dateOfBirth}
            password={record.password}
            age={record.age}
+          
           />
           <Popconfirm
             title="Delete Learner"

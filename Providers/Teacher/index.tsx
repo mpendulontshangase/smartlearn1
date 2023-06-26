@@ -22,6 +22,7 @@ import {
 } from "./action";
 import axios from "axios";
 import { getToken } from "../../utils/Decoder";
+import { IUserOut } from "../../models/acc.models";
 
 const CreateUrl = "https://localhost:44311/api/services/app/Teacher/Create";
 const getAllTeacherURL =
@@ -35,7 +36,7 @@ const TeacherProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
 
   const CreateTeacher = async (payload: ITeacher) => {
     try {
-      console.log("ww", payload);
+  
 
       const response = await axios.post(CreateUrl, payload, {
         headers: {
@@ -88,7 +89,7 @@ const TeacherProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
 
       if (response.status === 200) {
         dispatch(UpdateTeacherRequestAction(response.data.result));
-        console.log(response.data.result);
+       
         message.success("Teacher updated successfully");
       } else {
         throw new Error("Request failed with status " + response.status);
@@ -119,7 +120,7 @@ const TeacherProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   
 
 
-  // console.log("watt::",userIdRetriever)
+
 
 
   // const ViewbyUserIdTeacher = async (userIdRetriever) => {
@@ -130,6 +131,7 @@ const TeacherProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   //       },
   //     });
   //     dispatch(ViewRequestAction(response.data.result.id));
+  //     localStorage.setItem("theeInfo",response.data.result.id)
 
   
   //   } catch (error) {
